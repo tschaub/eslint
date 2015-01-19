@@ -31,6 +31,9 @@ eslintTester.addRuleTest("lib/rules/dot-notation", {
         { code: "a[null];", args: [2, {allowKeywords: false}] },
         { code: "a.true;", args: [2, {allowKeywords: true}] },
         { code: "a.null;", args: [2, {allowKeywords: true}] },
+        { code: "a['snake_case'];", args: [2, {allowSnakeCase: true}] },
+        { code: "a['Ugly_case'];", args: [2, {allowSnakeCase: true}] },
+        { code: "a['a_long_word'];", args: [2, {allowSnakeCase: true}] },
         "a.true;",
         "a.null;",
         "a[undefined];",
@@ -42,6 +45,7 @@ eslintTester.addRuleTest("lib/rules/dot-notation", {
         { code: "a['true'];", errors: [{ message: "[\"true\"] is better written in dot notation." }] },
         { code: "a[null];", errors: [{ message: "[null] is better written in dot notation." }] },
         { code: "a['b'];", errors: [{ message: "[\"b\"] is better written in dot notation." }] },
-        { code: "a.b['c'];", errors: [{ message: "[\"c\"] is better written in dot notation." }] }
+        { code: "a.b['c'];", errors: [{ message: "[\"c\"] is better written in dot notation." }] },
+        { code: "a['_dangle'];", args: [2, {allowSnakeCase: true}], errors: [{ message: "[\"_dangle\"] is better written in dot notation." }] }
     ]
 });
